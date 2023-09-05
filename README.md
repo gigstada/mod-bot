@@ -50,7 +50,7 @@ See the examples folder for some very basic examples of how this tool works. You
 - The AI can't read your mind and is also sometimes dumb, so be very specific about what you want.
 - Make changes incrementally to increase the chances of the AI understanding what you want. 
   For example, if you want to convert a JS file to Python and then use it in another Python file, do it in two runs of the script. The first run would convert the JS file to Python and the second run would import the new Python file into your other Python file and use it in an existing function.
-- Use the Python slice notation on your src_paths in the config file to prevent the AI from reading the entire file. See the comments in the generated config file to see how to express this. Note that the cost of using the GPT-4 API can add up quickly this helps limit the amount of text we're sending to the AI API.
+- Use the Python slice notation on your src_paths in the config file to prevent the AI from reading the entire file. See the comments in the generated config file to see how to express this. Note that the cost of using the GPT-4 API can add up quickly and this helps limit the amount of text we're sending to the AI API.
 
 ## GPT-3 vs GPT-4
 The script can use either GPT-3 or GPT-4. GPT-4 is much more powerful and can do more complex tasks, but it's also much more expensive. You can choose which version to use in the config file. If you don't specify a version, the script will use GPT-4 by default.
