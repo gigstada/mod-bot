@@ -76,7 +76,8 @@ def get_file_contents(src_paths):
     return file_contents
 
 # Avast ye! Here be the main function
-if __name__ == "__main__":
+def main():
+
     # Parse the arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", help="Path to the yaml config file.", default=None)
@@ -132,3 +133,7 @@ if __name__ == "__main__":
 
     last_message = run_conversation(system_message=system_prompt, user_message=user_message, gpt_functions=gpt_functions, model=model_name)
     print(f'Conversation has ended. Final message from the assistant:\n\n{last_message}')
+
+
+if __name__ == "__main__":
+    main()
