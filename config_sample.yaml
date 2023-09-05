@@ -1,0 +1,32 @@
+# YAML Configuration file for the file-mod-ai.py script
+
+# Instructions for the AI. These instructions will be sent to the AI along with the file paths it can request.
+# The AI will use these instructions to generate the modifications.
+instructions: |
+  Your instructions go here.
+  Take as many lines as you need.
+
+# Source paths of the files to be processed by the AI. These files (or parts of files if using slices) will be read 
+# and sent to the AI.
+# Use Python slice syntax at the end of the path to specify a range of lines to read from the file.
+src_paths: 
+  - path/to/file1.txt
+  # - path/to/file2.txt[5:25]
+
+# Glob string to select multiple files based on a pattern. All files matching this pattern will sent to the AI
+# unless they are excluded by glob_exclude. This field is optional.
+# Note this can be used together with src_paths. The merged result of both fields will be used.
+# glob: "*.txt"
+
+# Glob string to exclude from glob pattern. All files matching this pattern will be omitted from the matched paths from
+# the glob value. This field does nothing unless glob is specified in the config file.
+# glob_exclude: "*.mp3"
+
+# Model to use for the AI. You can use the shortcuts "4" for gpt-4, "3" for gpt-3.5-turbo, and "3l" for gpt-3.5-turbo-16k.
+# If no model is specified, gpt-4 will be used by default.
+# model: "3l"
+
+# Use the --config file location as the current working directory instead of the CWD of the terminal session.
+# This is useful if you have a folder with a config file and some files to update and you want to run the script
+# on that folder without `cd`ing into it.
+# use_config_for_cwd: true

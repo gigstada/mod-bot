@@ -1,0 +1,7 @@
+instructions: |
+  Find and fix any bugs you see in this code.
+
+src_paths: 
+  - example.js
+
+use_config_for_cwd: true

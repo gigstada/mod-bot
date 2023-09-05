@@ -1,0 +1,9 @@
+instructions: |
+  Convert this code to python and then add some example print statement that use the functions in the new python file.
+
+# Note the add4Numbers function is ommitted from the .py file because we used the slice notation below.
+
+src_paths: 
+  - example.js[1:17]
+
+use_config_for_cwd: true
