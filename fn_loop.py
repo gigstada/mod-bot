@@ -42,7 +42,11 @@ def run_conversation(system_message, user_message, gpt_functions, model="gpt-4")
             
             function_name = response_message["function_call"]["name"]
             function_to_call = available_functions[function_name]
-            function_args = json.loads(response_message["function_call"]["arguments"])
+            try:
+                function_args = json.loads(response_message["function_call"]["arguments"])
+            except json.decoder.JSONDecodeError:
+                print("JSONDecodeError: Could not decode arguments for function call.")
+                print(response_message["function_call"]["arguments"])
             function_response = function_to_call(**function_args)
             
             messages.append(
