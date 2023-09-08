@@ -11,6 +11,7 @@ def save_messages(filename, content):
             function_call = message.get('function_call', '')
             file.write('# ' + role.capitalize() + '\n```\nContent: ' +  str(content))
             if function_call:
+                print(function_call['arguments'])
                 arguments = json.loads(function_call['arguments'])
                 function_call['arguments'] = arguments
                 file.write('\nFunction call: ' + json.dumps(function_call, indent=4))
