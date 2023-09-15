@@ -13,7 +13,9 @@ def propose_file_operations(proposed_file_operations):
         if operation_type == 'create-or-replace-file':
             full_contents = operation['full_contents']
             try:
-                os.makedirs(os.path.dirname(src_path), exist_ok=True)
+                dir_path = os.path.dirname(src_path)
+                if len(dir_path) > 0:
+                    os.makedirs(dir_path, exist_ok=True)
                 with open(src_path, 'w') as file:
                     file.write(full_contents)
             except PermissionError:
