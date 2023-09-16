@@ -6,7 +6,6 @@ import sys
 import glob
 import argparse
 import shutil
-import json
 
 # Arr, haul in these third-party modules, ye scallywags
 import openai
@@ -65,7 +64,7 @@ if __name__ == "__main__":
 
     # Check if config 'dumb' is True or False
     dumb = config.get('dumb', False)
-    get_file_contents = simple_file_serializer.get_file_contents if dumb else json_file_serializer.get_file_contents
+    get_file_contents_string = simple_file_serializer.get_file_contents_string if dumb else json_file_serializer.get_file_contents_string
 
     # Use config file's directory as current working directory, if specified in the config
     if config.get('use_config_for_cwd', False):
@@ -90,7 +89,7 @@ if __name__ == "__main__":
 
     # Get the file contents
     if isinstance(src_paths, list) and len(src_paths) > 0:
-        file_contents = get_file_contents(src_paths)
+        file_contents = get_file_contents_string(src_paths)
     else:
         file_contents = []
 
@@ -98,7 +97,7 @@ if __name__ == "__main__":
     with open(os.path.join(dir_path, 'system_prompt.md'), 'r') as file:
         system_prompt = file.read()
 
-    user_message = instructions + "\n Here are the file contents you can use: " + json.dumps(file_contents)
+    user_message = instructions + "\n Here are the file contents you can use:\n" + file_contents
 
     gpt_functions = get_gpt_functions()
 

@@ -1,6 +1,6 @@
 import re
 
-def get_file_contents(src_paths):
+def get_file_contents_string(src_paths):
     file_contents = []
     for src_path in src_paths:
         start_line, end_line = None, None

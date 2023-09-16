@@ -1,4 +1,5 @@
 import re
+import json
 
 def get_file_contents(src_paths):
     file_contents = []
@@ -34,3 +35,8 @@ def get_file_contents(src_paths):
             'is_partial': is_partial
         })
     return file_contents
+
+
+def get_file_contents_string(src_paths):
+    file_contents = get_file_contents(src_paths)
+    return json.dumps(file_contents)
