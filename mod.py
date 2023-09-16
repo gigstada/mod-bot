@@ -7,13 +7,13 @@ import glob
 import argparse
 import shutil
 import json
-import re
 
 # Arr, haul in these third-party modules, ye scallywags
 import openai
 import yaml
 from fn_loop import run_conversation
 from gpt_functions import get_gpt_functions 
+import json_file_serializer
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -40,40 +40,7 @@ def get_model_name_from_shortcut(shortcut):
     print(f'Using AI model: {model}')
     return model
 
-def get_file_contents(src_paths):
-    file_contents = []
-    for src_path in src_paths:
-        start_line, end_line = None, None
-        
-        # Check if the src_path has slice notation
-        has_slice = re.search(r'(.*)\[(\d+):(\d+)\]$', src_path)
-        if has_slice:
-            groups = has_slice.groups()
-            src_path = groups[0]
-            try:
-                start_line = int(groups[1])
-                end_line = int(groups[2])
-            except ValueError:
-                start_line, end_line = None, None
-            is_partial = True
-        else:
-            is_partial = False
 
-        with open(src_path, 'r') as file:
-            contents = file.readlines()
-            if is_partial:
-                contents = ''.join(contents[start_line - 1:end_line - 1])
-            else:
-                contents = ''.join(contents)
-
-        file_contents.append({
-            'src_path': src_path,
-            'contents': contents,
-            'start_line': start_line,
-            'end_line': end_line,
-            'is_partial': is_partial
-        })
-    return file_contents
 
 # Avast ye! Here be the main function
 if __name__ == "__main__":
@@ -118,7 +85,7 @@ if __name__ == "__main__":
 
     # Get the file contents
     if isinstance(src_paths, list) and len(src_paths) > 0:
-        file_contents= get_file_contents(src_paths)
+        file_contents= json_file_serializer.get_file_contents(src_paths)
     else:
         file_contents = []
 
