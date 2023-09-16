@@ -14,6 +14,7 @@ import yaml
 from fn_loop import run_conversation
 from gpt_functions import get_gpt_functions 
 import json_file_serializer
+import simple_file_serializer
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -62,6 +63,10 @@ if __name__ == "__main__":
     with open(args.config, 'r') as config_file:
         config = yaml.safe_load(config_file)
 
+    # Check if config 'dumb' is True or False
+    dumb = config.get('dumb', False)
+    get_file_contents = simple_file_serializer.get_file_contents if dumb else json_file_serializer.get_file_contents
+
     # Use config file's directory as current working directory, if specified in the config
     if config.get('use_config_for_cwd', False):
         os.chdir(os.path.dirname(os.path.realpath(args.config)))
@@ -85,7 +90,7 @@ if __name__ == "__main__":
 
     # Get the file contents
     if isinstance(src_paths, list) and len(src_paths) > 0:
-        file_contents= json_file_serializer.get_file_contents(src_paths)
+        file_contents = get_file_contents(src_paths)
     else:
         file_contents = []
 
