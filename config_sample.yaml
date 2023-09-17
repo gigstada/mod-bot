@@ -31,6 +31,6 @@ src_paths:
 # on that folder without `cd`ing into it.
 # use_config_for_cwd: true
 
-# Does things a little dumber to make it more likely for GPT 3 to understand what's going on. Note that this only
-# writes responses to output.txt for now. 
+# Does things a little dumber to make it more likely for GPT 3 to understand what's going on. Note that this will not 
+# update files and will only respond in the terminal.
 # dumb: true

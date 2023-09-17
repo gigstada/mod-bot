@@ -99,7 +99,7 @@ if __name__ == "__main__":
 
     user_message = instructions + "\n Here are the file contents you can use:\n" + file_contents
 
-    gpt_functions = get_gpt_functions()
+    gpt_functions = get_gpt_functions() if not dumb else None
 
     last_message = run_conversation(system_message=system_prompt, user_message=user_message, gpt_functions=gpt_functions, model=model_name)
     print(f'Conversation has ended. Final message from the assistant:\n\n{last_message}')

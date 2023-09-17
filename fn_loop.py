@@ -19,17 +19,22 @@ def save_messages(filename, content):
 
 def run_conversation(system_message, user_message, gpt_functions, model="gpt-4"):
     messages = [{"role": "system", "content": system_message}, {"role": "user", "content": user_message}]
-    functions = [func['def'] for func in gpt_functions.values()]
-    available_functions = {func_name: func['fn'] for func_name, func in gpt_functions.items()}
+    functions = [func['def'] for func in gpt_functions.values()] if gpt_functions else None
+    available_functions = {func_name: func['fn'] for func_name, func in gpt_functions.items()} if gpt_functions else None
 
     while True:
         print("Starting a new iteration of the loop...")
-        response = openai.ChatCompletion.create(
-            model=model,
-            messages=messages,
-            functions=functions,
-            function_call="auto",
-        )
+
+        args = {
+            'model': model,
+            'messages': messages,
+        }
+        
+        if functions is not None:
+            args['functions'] = functions
+            args['function_call'] = "auto"
+
+        response = openai.ChatCompletion.create(**args)
         print("Response received from OpenAI API.")
         
         response_message = response["choices"][0]["message"]
