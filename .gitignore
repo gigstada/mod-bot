@@ -2,3 +2,4 @@ __pycache__
 *.pyc
 config.tmp.yaml
 mod-messages.*
+gpt_requests.md

@@ -1,6 +1,13 @@
 import openai
 import json
 
+def add_log_event(obj):
+    filename = 'gpt_requests.md'
+    formatted_obj = json.dumps(obj, indent=4)
+    with open(filename, 'a') as file:
+        file.write('\n\n' + formatted_obj)
+
+
 def save_messages(filename, content):
     filename += '.md'
     content = json.loads(json.dumps(content))
@@ -22,6 +29,9 @@ def run_conversation(system_message, user_message, gpt_functions, model="gpt-4")
     functions = [func['def'] for func in gpt_functions.values()] if gpt_functions else None
     available_functions = {func_name: func['fn'] for func_name, func in gpt_functions.items()} if gpt_functions else None
 
+    with open('gpt_requests.md', 'w') as file:
+        file.write('')
+
     while True:
         print("Starting a new iteration of the loop...")
 
@@ -34,8 +44,10 @@ def run_conversation(system_message, user_message, gpt_functions, model="gpt-4")
             args['functions'] = functions
             args['function_call'] = "auto"
 
+        add_log_event({'request': args})
         response = openai.ChatCompletion.create(**args)
         print("Response received from OpenAI API.")
+        add_log_event({'response': response})
         
         response_message = response["choices"][0]["message"]
         
