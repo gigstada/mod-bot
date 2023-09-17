@@ -40,13 +40,12 @@ def get_model_name_from_shortcut(shortcut):
     print(f'Using AI model: {model}')
     return model
 
-
-
 # Avast ye! Here be the main function
 if __name__ == "__main__":
     # Parse the arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", help="Path to the yaml config file.", default=None)
+    parser.add_argument("--simulate", type=bool, default=False, help="If true, prints a list of files that would be sent and exits without calling the AI.")
     parser.add_argument("--gen-config", help="Generate a config file in the current working directory.", nargs='?', const='config.tmp.yaml')
     args = parser.parse_args()
 
@@ -100,6 +99,10 @@ if __name__ == "__main__":
     user_message = instructions + "\n Here are the file contents you can use:\n" + file_contents
 
     gpt_functions = get_gpt_functions() if not dumb else None
+
+    if args.simulate:
+        print("Simulation mode activated. Here are the list of files:", src_paths)
+        sys.exit()
 
     last_message = run_conversation(system_message=system_prompt, user_message=user_message, gpt_functions=gpt_functions, model=model_name)
     print(f'Conversation has ended. Final message from the assistant:\n\n{last_message}')
