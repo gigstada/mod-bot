@@ -45,7 +45,7 @@ if __name__ == "__main__":
     # Parse the arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", help="Path to the yaml config file.", default=None)
-    parser.add_argument("--simulate", type=bool, default=False, help="If true, prints a list of files that would be sent and exits without calling the AI.")
+    parser.add_argument("--simulate", action='store_true', help="If present, prints a list of files that would be sent and exits without calling the AI.")
     parser.add_argument("--gen-config", help="Generate a config file in the current working directory.", nargs='?', const='config.tmp.yaml')
     args = parser.parse_args()
 
