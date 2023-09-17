@@ -30,3 +30,7 @@ src_paths:
 # This is useful if you have a folder with a config file and some files to update and you want to run the script
 # on that folder without `cd`ing into it.
 # use_config_for_cwd: true
+
+# Does things a little dumber to make it more likely for GPT 3 to understand what's going on. Note that this only
+# writes responses to output.txt for now. 
+# dumb: true
