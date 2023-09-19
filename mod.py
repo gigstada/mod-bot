@@ -90,7 +90,7 @@ if __name__ == "__main__":
     if isinstance(src_paths, list) and len(src_paths) > 0:
         file_contents = get_file_contents_string(src_paths)
     else:
-        file_contents = []
+        file_contents = ""
 
     # Load the system prompt from the file
     with open(os.path.join(dir_path, 'system_prompt.md'), 'r') as file:
