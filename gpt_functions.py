@@ -6,11 +6,14 @@ def propose_file_operations(proposed_file_operations):
         'status': 'success',
         'message': '',
     }
+
+    print('attempting to perform file operations')
     for operation in proposed_file_operations:
         operation_type = operation['operation_type']
         src_path = operation['src_path']
         
         if operation_type == 'create-or-replace-file':
+            print('trying a full file replace on ' + src_path)
             full_contents = operation['full_contents']
             try:
                 dir_path = os.path.dirname(src_path)
@@ -23,6 +26,7 @@ def propose_file_operations(proposed_file_operations):
                 result['message'] += f"You do not have permission to write to {src_path}.\n"
                 continue
         elif operation_type == 'partial-file-replace':
+            print('trying a partial file replace on ' + src_path)
             find = operation['find']
             replace_with = operation['replace_with']
             try:
