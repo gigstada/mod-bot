@@ -38,6 +38,7 @@ def run_conversation(system_message, user_message, gpt_functions, model="gpt-4")
         args = {
             'model': model,
             'messages': messages,
+            'temperature': 0.5,
         }
         
         if functions is not None:
