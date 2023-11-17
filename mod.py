@@ -29,7 +29,7 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # Batten down the hatches and prepare ye dictionary, mapping shortcut strings to the full model name
 MODEL_MAP = {
-    "4": "gpt-4",
+    "4": "gpt-4-1106-preview",
     "3": "gpt-3.5-turbo",
     "3l": "gpt-3.5-turbo-16k",
 }
